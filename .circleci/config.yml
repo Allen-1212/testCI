@@ -24,7 +24,7 @@ jobs:
           name: Check codecov integrity
           command: curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM && shasum -a 256 -c codecov.SHA256SUM
        - run:
-          name: run codecov
+          name: Upload coverage
           command: ./codecov
           
            
