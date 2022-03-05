@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Check formatting
-        command: go fmt ./... && git diff --exit-code
+          name: Check formatting
+          command: go fmt ./... && git diff --exit-code
   build:
     working_directory: ~/repo
     docker:
