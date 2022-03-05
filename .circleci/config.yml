@@ -15,14 +15,14 @@ jobs:
           name: Install Dependencies
           command: go get ./...
       - run:
-          name: Run tests
-          command: go test -coverprofile=coverage.txt -covermode=atomic ./...
-      - run:
           name: Get codecov
           command: curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov 
       - run:
           name: Get codecov integrity
           command: curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM && shasum -a 256 -c codecov.SHA256SUM
+      - run:
+          name: Run tests
+          command: go test -coverprofile=coverage.txt -covermode=atomic ./... && export CODECOV_TOKEN='1bf0f144-72a4-4d34-adfb-01734526fc3b' && ./codecov
       - run:
           name: Upload coverage
           command: export CODECOV_TOKEN='1bf0f144-72a4-4d34-adfb-01734526fc3b' && ./codecov
