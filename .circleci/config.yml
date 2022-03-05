@@ -24,6 +24,9 @@ jobs:
           name: Run tests
           command: go test -count 1 ./...
       - run:
+          name: list
+          command: ls -ltr ./
+      - run:
           name: build coverage profile
           command: go test -coverprofile=coverage.txt -covermode=atomic ./api/...
       - run:
