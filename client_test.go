@@ -1,13 +1,12 @@
 package client
 
 import (
-  "testing" 
+	"testing"
 )
 
 func TestF1(t *testing.T) {
-  err := F1()
-  if err != nil {
-    t.Errorf("Error: %v", err) 
-  }
+	err := F1()
+	if err != nil {
+		t.Errorf("Error: %v", err)
+	}
 }
-

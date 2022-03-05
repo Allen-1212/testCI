@@ -1,10 +1,10 @@
 package client
 
 import (
-  "fmt"
+	"fmt"
 )
 
 func F1() error {
-  fmt.Println("F1")
-  return nil
+	fmt.Println("F1")
+	return nil
 }
