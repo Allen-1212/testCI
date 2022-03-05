@@ -1,0 +1,36 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/go:1.17.8
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: go get ./...
+      - run:
+          name: Run tests
+          command: go test -coverprofile=coverage.txt -covermode=atomic ./...
+      - run:
+          name: Get codecov
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov 
+      - run:
+          name: Get codecov integrity
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM && shasum -a 256 -c codecov.SHA256SUM
+      - run:
+          name: Upload coverage
+          command: export CODECOV_TOKEN='1bf0f144-72a4-4d34-adfb-01734526fc3b' && ./codecov
+          
+           
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  build-workflow:
+    jobs:
+      - build
