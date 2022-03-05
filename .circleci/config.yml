@@ -8,7 +8,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: circleci/golang:1.14.6
+      - image: circleci/golang:1.17.8
     steps:
       - checkout
       - run:
@@ -16,7 +16,17 @@ jobs:
           command: go get ./...
       - run:
           name: Run tests
-          command: go test -v            
+          command: go test -coverprofile=coverage.txt -covermode=atomic ./...
+      - run:
+          name: Get codecov uploader
+          command curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov 
+      - run
+          name: Check codecov integrity
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM && shasum -a 256 -c codecov.SHA256SUM
+       - run
+          name: run codecov
+          command: ./codecov
+          
            
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
