@@ -19,7 +19,7 @@ jobs:
           command: go test -coverprofile=coverage.txt -covermode=atomic ./...
       - run:
           name: Get codecov uploader
-          command curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov 
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov 
       - run
           name: Check codecov integrity
           command: curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM && shasum -a 256 -c codecov.SHA256SUM
