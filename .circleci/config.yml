@@ -17,6 +17,9 @@ jobs:
       - run:
           name: Run tests
           command: go test -coverprofile=coverage.txt -covermode=atomic ./...
+      - run:
+          name: Get codecov
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov 
 
           
            
