@@ -5,6 +5,15 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  style:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/go:1.17.8
+    steps:
+      - checkout
+      - run:
+        name: Check formatting
+        command: go fmt ./... && git diff --exit-code
   build:
     working_directory: ~/repo
     docker:
@@ -36,4 +45,5 @@ jobs:
 workflows:
   build-workflow:
     jobs:
+      - style
       - build
