@@ -20,10 +20,10 @@ jobs:
       - run:
           name: Get codecov uploader
           command: curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov 
-      - run
+      - run:
           name: Check codecov integrity
           command: curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM && shasum -a 256 -c codecov.SHA256SUM
-       - run
+       - run:
           name: run codecov
           command: ./codecov
           
